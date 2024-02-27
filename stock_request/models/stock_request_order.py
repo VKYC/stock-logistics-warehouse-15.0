@@ -175,8 +175,8 @@ class StockRequestOrder(models.Model):
         if 'stock_request_ids' in vals:
             for val in vals['stock_request_ids']:
                 if val[2]:
-                    request_id = self.env['stock.request'].search([('id', '=', val[1])], limit=1)
-                    route_int_id = val[2].get("route_id") or request_id.route_id
+                    request_id = self.env['stock.request'].search([('id', '=', val[1])], limit=1) if type(val[1]) == int else False
+                    route_int_id = val[2].get("route_id") or (request_id and request_id.route_id)
                     product_uom_qty = val[2].get("product_uom_qty") or request_id.product_uom_qty
                     product_int_id = val[2].get("product_id") or request_id.product_id
                     if request_id and route_int_id and product_int_id and product_uom_qty:
