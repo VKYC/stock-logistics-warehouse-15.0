@@ -17,11 +17,13 @@ class StockRequest(models.Model):
         readonly=False,
         check_company=True,
         compute_sudo=True,
+        required=True,
     )
     analytic_tag_ids = fields.Many2many(
         comodel_name="account.analytic.tag",
         string="Analytic Tags",
         check_company=True,
+        required=True,
     )
 
     @api.depends("order_id")
