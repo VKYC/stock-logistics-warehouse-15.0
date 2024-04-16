@@ -34,6 +34,7 @@ class StockRequest(models.Model):
         for req in self:
             if req.order_id and req.order_id.default_analytic_account_id:
                 req.analytic_account_id = req.order_id.default_analytic_account_id
+                req.analytic_tag_ids = req.order_id.default_analytic_tag_ids
 
     def _prepare_procurement_values(self, group_id=False):
         """
